@@ -32,25 +32,6 @@ class AccessorRegister:
 register_dataframe_accessor = AccessorRegister(DataFrame)
 
 
-def register_dataframe_accessor(name):
-    # https://github.com/pandas-dev/pandas/blob/v1.2.4/pandas/core/accessor.py#L190
-    from pyspark.sql import DataFrame
-
-    def decorator(accessor):
-        if hasattr(DataFrame, name):
-            warnings.warn(
-                f"registration of accessor {repr(accessor)} under name "
-                f"{repr(name)} for type {repr(DataFrame)} is overriding a preexisting "
-                f"attribute with the same name.",
-                UserWarning,
-                stacklevel=2,
-            )
-        setattr(DataFrame, name, CachedAccessor(name, accessor))
-        return accessor
-
-    return decorator
-
-
 class _DataFrameMethod(ABC):
     def __init__(self, frame):
         self._frame = frame
