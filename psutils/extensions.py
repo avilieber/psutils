@@ -34,6 +34,8 @@ register_dataframe_accessor = AccessorRegister(DataFrame)
 
 class _DataFrameMethod(ABC):
     def __init__(self, frame):
+        if not isinstance(frame, DataFrame):
+            raise ValueError("PySpark DataFrames only.")
         self._frame = frame
 
     @abstractmethod
