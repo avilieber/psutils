@@ -3,7 +3,7 @@ import warnings
 from abc import ABC, abstractmethod
 
 from pandas.core.accessor import CachedAccessor
-from pandas.core.frame import DataFrame
+from pyspark.sql import DataFrame
 
 
 class AccessorRegister:
