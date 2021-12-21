@@ -50,3 +50,21 @@ class WithColumns(_DataFrameMethod):
         return functools.reduce(
             lambda df, tup: df.withColumn(*tup), columns.items(), self._frame
         )
+    
+@register_dataframe_accessor('cached')
+class Cached(_DataFrameMethod):
+    def __call__(self):
+        return self._frane
+        
+    def _cache(self):
+        self._frame.persist()
+        
+    def _uncache(self):
+        self._frame.unpersist()
+        
+    def __enter__(self):
+        self._cache()
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self._uncache()
