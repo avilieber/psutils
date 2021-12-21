@@ -51,6 +51,7 @@ class WithColumns(_DataFrameMethod):
             lambda df, tup: df.withColumn(*tup), columns.items(), self._frame
         )
     
+
 @register_dataframe_accessor('cached')
 class Cached(_DataFrameMethod):
     def __call__(self):
