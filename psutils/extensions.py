@@ -55,7 +55,7 @@ class WithColumns(_DataFrameMethod):
 @register_dataframe_accessor('cached')
 class Cached(_DataFrameMethod):
     def __call__(self):
-        return self._frane
+        return self._frame
         
     def _cache(self):
         self._frame.persist()
